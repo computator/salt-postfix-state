@@ -1,5 +1,6 @@
 postfix:
   hostname: postfix-test
+  signing_domain: postfix-test
   # if networks is set, it's a list of trusted networks allowed
   # to send email through the server
   networks:
