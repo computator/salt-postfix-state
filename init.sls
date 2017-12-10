@@ -23,6 +23,9 @@ postfix-aliases:
   file.blockreplace:
     - name: /etc/aliases
     - content: |
+        {% for alias, target in salt['pillar.get']('postfix:aliases', {}).iteritems() -%}
+        {{ alias }}: {{ target }}
+        {% endfor %}
     - append_if_not_found: true
   cmd.run:
     - name: postalias /etc/aliases
