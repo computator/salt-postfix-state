@@ -12,5 +12,6 @@ postfix-base-config:
         mynetworks=
         mynetworks_style=host
         {% endif %}
+        smtpd_client_restrictions=permit_mynetworks reject_unknown_client_hostname
     - require_in:
       - file: postfix-config
