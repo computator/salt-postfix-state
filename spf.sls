@@ -17,7 +17,7 @@ postfix-spf-config:
   file.accumulated:
     - filename: /etc/postfix/main.cf
     - text: |
-        check_policy_service = unix:private/policy_spf
+        smtpd_recipient_restrictions = check_policy_service unix:private/policy_spf
         policy_spf_time_limit = 3600
     - require:
       - file: postfix-spf-master
