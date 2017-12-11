@@ -18,6 +18,13 @@ postfix-config:
       - file: postfix-base-config # from postfix.local or postfix.public
     - watch_in:
       - service: postfix
+  cmd.run:
+    # comments lines so values are only set once, leaving only the last line
+    - name: cp /etc/postfix/main.cf /etc/postfix/main.cf.tmp && awk -F '[= \t]' '/^\s*[^# \t]/ {if($1 "" in k) {l[k[$1 ""]] = "#" l[k[$1 ""]]; k[$1 ""] = NR}}; {l[NR] = $0; k[$1 ""] = NR}; END {for(i in l) print l[i]}' /etc/postfix/main.cf.tmp > /etc/postfix/main.cf; rm -f /etc/postfix/main.cf.tmp
+    - onchanges:
+      - file: postfix-config
+    - watch_in:
+      - service: postfix
 
 postfix-aliases:
   file.blockreplace:
